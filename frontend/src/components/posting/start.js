@@ -154,31 +154,31 @@ export default class extends Form {
     //change value of title into x
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + event.target.value + " to/" + this.state.to +
-      " date/" + this.state.date + "  til/ " + this.state.no_later_than)
+      " date/" + this.state.date + "  til/" + this.state.no_later_than)
   }
   onToChange = (event) => {
     this.changeValue("to", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + event.target.value +
-      " date/" + this.state.date + "  til/ " + this.state.no_later_than)
+      " date/" + this.state.date + "  til/" + this.state.no_later_than)
   }
   onDateChange = (event) => {
     this.changeValue("date", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + event.target.value + "  til/ " + this.state.no_later_than)
+      " date/" + event.target.value + "  til/" + this.state.no_later_than)
   }
   onNoLaterThanChange = (event) => {
     this.changeValue("no_later_than", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + this.state.date + "  til/ " + event.target.value)
+      " date/" + this.state.date + "  til/" + event.target.value)
   }
   onNoOfseatsChange = (event) => {
     this.changeValue("no_of_seats", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + event.target.value +
       " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + this.state.date + " til " + this.state.no_later_than)
+      " date/" + this.state.date + " til/" + this.state.no_later_than)
   }
   onNoOfRoomChange = (event) => {
     this.changeValue("no_of_room", event.target.value)

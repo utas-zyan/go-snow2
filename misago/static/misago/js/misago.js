@@ -18325,23 +18325,23 @@ var _default = /*#__PURE__*/function (_Form) {
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this), "onFromChange", function (event) {
       _this.changeValue("from", event.target.value);
       //change value of title into x
-      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + _this.state.no_of_seats + " from/" + event.target.value + " to/" + _this.state.to + " date/" + _this.state.date + "  til/ " + _this.state.no_later_than);
+      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + _this.state.no_of_seats + " from/" + event.target.value + " to/" + _this.state.to + " date/" + _this.state.date + "  til/" + _this.state.no_later_than);
     });
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this), "onToChange", function (event) {
       _this.changeValue("to", event.target.value);
-      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + _this.state.no_of_seats + " from/" + _this.state.from + " to/" + event.target.value + " date/" + _this.state.date + "  til/ " + _this.state.no_later_than);
+      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + _this.state.no_of_seats + " from/" + _this.state.from + " to/" + event.target.value + " date/" + _this.state.date + "  til/" + _this.state.no_later_than);
     });
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this), "onDateChange", function (event) {
       _this.changeValue("date", event.target.value);
-      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + _this.state.no_of_seats + " from/" + _this.state.from + " to/" + _this.state.to + " date/" + event.target.value + "  til/ " + _this.state.no_later_than);
+      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + _this.state.no_of_seats + " from/" + _this.state.from + " to/" + _this.state.to + " date/" + event.target.value + "  til/" + _this.state.no_later_than);
     });
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this), "onNoLaterThanChange", function (event) {
       _this.changeValue("no_later_than", event.target.value);
-      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + _this.state.no_of_seats + " from/" + _this.state.from + " to/" + _this.state.to + " date/" + _this.state.date + "  til/ " + event.target.value);
+      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + _this.state.no_of_seats + " from/" + _this.state.from + " to/" + _this.state.to + " date/" + _this.state.date + "  til/" + event.target.value);
     });
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this), "onNoOfseatsChange", function (event) {
       _this.changeValue("no_of_seats", event.target.value);
-      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + event.target.value + " from/" + _this.state.from + " to/" + _this.state.to + " date/" + _this.state.date + " til " + _this.state.no_later_than);
+      _this.changeValue("title", "[" + _this.state.type.value + "] seats " + event.target.value + " from/" + _this.state.from + " to/" + _this.state.to + " date/" + _this.state.date + " til/" + _this.state.no_later_than);
     });
     (0,_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])((0,_babel_runtime_helpers_assertThisInitialized__WEBPACK_IMPORTED_MODULE_2__["default"])(_this), "onNoOfRoomChange", function (event) {
       _this.changeValue("no_of_room", event.target.value);
@@ -30939,7 +30939,7 @@ var ThreadsToolbar = function ThreadsToolbar(_ref) {
     baseUrl: baseUrl,
     list: list,
     lists: lists
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarSpacer, null), !!user.id && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarSection, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarSpacer, null), !!user.id && category.id != 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarSection, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
     className: "btn-primary btn-outline btn-block",
     disabled: disabled,
     onClick: function onClick() {
@@ -30952,7 +30952,7 @@ var ThreadsToolbar = function ThreadsToolbar(_ref) {
     }
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
     className: "material-icon"
-  }, "chat"), pgettext("threads list nav", "Start thread"))), !!moderation.allow && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarItem, {
+  }, "chat"), pgettext("threads list nav", "New Thread"))), !!moderation.allow && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarItem, {
     shrink: true
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ThreadsToolbarModeration__WEBPACK_IMPORTED_MODULE_6__["default"], {
     api: api,
@@ -30970,7 +30970,33 @@ var ThreadsToolbar = function ThreadsToolbar(_ref) {
     route: route,
     user: user,
     disabled: disabled
-  }))));
+  }))), !!user.id && category.id == 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarSection, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "btn-primary btn-outline btn-block",
+    disabled: disabled,
+    onClick: function onClick() {
+      _services_posting__WEBPACK_IMPORTED_MODULE_1__["default"].open(startThread || {
+        mode: "START",
+        config: misago.get("THREAD_EDITOR_API"),
+        submit: misago.get("THREADS_API"),
+        category: 4
+      });
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "material-icon"
+  }, "chat"), pgettext("threads list nav", "New Thread on Ride"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Toolbar__WEBPACK_IMPORTED_MODULE_3__.ToolbarItem, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    className: "btn-primary btn-outline btn-block",
+    disabled: disabled,
+    onClick: function onClick() {
+      _services_posting__WEBPACK_IMPORTED_MODULE_1__["default"].open(startThread || {
+        mode: "START",
+        config: misago.get("THREAD_EDITOR_API"),
+        submit: misago.get("THREADS_API"),
+        category: 5
+      });
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+    className: "material-icon"
+  }, "chat"), pgettext("threads list nav", "New Thread on Rooms")))));
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ThreadsToolbar);
 
