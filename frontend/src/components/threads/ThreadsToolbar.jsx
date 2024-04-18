@@ -35,7 +35,7 @@ const ThreadsToolbar = ({
       <ToolbarSection>
         <ToolbarItem>
           <ThreadsCategoryPicker
-            allItems={pgettext("threads list nav", "All categories")}
+            allItems={pgettext("threads list nav", "Filter by Category")}
             parentUrl={list.path}
             category={topCategory}
             categories={topCategories}

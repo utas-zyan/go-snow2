@@ -80,7 +80,7 @@ default_settings = [
     {
         "setting": "thread_title_length_max",
         "python_type": "int",
-        "wet_value": 90,
+        "wet_value": 120,
         "is_public": True,
     },
     {
