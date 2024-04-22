@@ -53,7 +53,6 @@ export default class extends Form {
       start: new Date().toISOString().split('T')[0],
       end: new Date().toISOString().split('T')[0],
       date: new Date().toISOString().split('T')[0],
-      no_later_than: new Date().toISOString().split('T')[0],
       no_of_seats: 1,
       no_of_room: 1,
       category: props.category || null,
@@ -147,38 +146,33 @@ export default class extends Form {
 
     this.changeValue("title", "[" + event.target.value + "]: seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + this.state.date + "  til/ " + this.state.no_later_than)
+      " date/" + this.state.date)
   }
   onFromChange = (event) => {
     this.changeValue("from", event.target.value)
     //change value of title into x
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + event.target.value + " to/" + this.state.to +
-      " date/" + this.state.date + "  til/" + this.state.no_later_than)
+      " date/" + this.state.date)
   }
   onToChange = (event) => {
     this.changeValue("to", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + event.target.value +
-      " date/" + this.state.date + "  til/" + this.state.no_later_than)
+      " date/" + this.state.date)
   }
   onDateChange = (event) => {
     this.changeValue("date", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + event.target.value + "  til/" + this.state.no_later_than)
+      " date/" + event.target.value)
   }
-  onNoLaterThanChange = (event) => {
-    this.changeValue("no_later_than", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
-      " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + this.state.date + "  til/" + event.target.value)
-  }
+
   onNoOfseatsChange = (event) => {
     this.changeValue("no_of_seats", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] seats " + event.target.value +
+    this.changeValue("title", "[" + this.state.type.value + "] rooms " + event.target.value +
       " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + this.state.date + " til/" + this.state.no_later_than)
+      " date/" + this.state.date)
   }
   onNoOfRoomChange = (event) => {
     this.changeValue("no_of_room", event.target.value)
@@ -283,6 +277,23 @@ export default class extends Form {
   }
 
   clean() {
+
+    if (this.state.category === 4) {
+      if (!this.state.from.trim().length) {
+        snackbar.error(pgettext("posting form", "Please provide where you start."))
+        return false
+      }
+      if (!this.state.to.trim().length) {
+        snackbar.error(pgettext("posting form", "Please provide your destination"))
+        return false
+      }
+    } else if (this.state.category === 5) {
+      if (!this.state.city.trim().length) {
+        snackbar.error(pgettext("posting form", "Please provide which city."))
+        return false
+      }
+    }
+
     if (!this.state.title.trim().length) {
       snackbar.error(
         pgettext("posting form", "Please provide thread title.")
@@ -487,26 +498,15 @@ export default class extends Form {
                       value={this.state.to}
                     />
                     <label>
-                      {pgettext("post thread", "Starting")}
+                      {pgettext("post thread", "Date")}
                     </label>
                     <input
                       className="form-control"
                       disabled={this.state.isLoading}
                       onChange={this.onDateChange}
-                      placeholder={pgettext("post thread", "Starting")}
+                      placeholder={pgettext("post thread", "Date")}
                       type="date"
-                      value={this.state.start}
-                    />
-                    <label>
-                      {pgettext("post thread", "Ending")}
-                    </label>
-                    <input
-                      className="form-control"
-                      disabled={this.state.isLoading}
-                      onChange={this.onNoLaterThanChange}
-                      placeholder={pgettext("post thread", "No later than")}
-                      type="date"
-                      value={this.state.end}
+                      value={this.state.date}
                     />
                   </ToolbarItem>
                 </ToolbarSection>
@@ -554,9 +554,9 @@ export default class extends Form {
                       <input
                         className="form-control"
                         disabled={this.state.isLoading}
-                        onChange={this.onDateChange}
+                        onChange={this.onStartChange}
                         type="date"
-                        value={this.state.date}
+                        value={this.state.start}
                       />
                       <label>
                         {pgettext("post thread", "Ending")}
@@ -564,9 +564,9 @@ export default class extends Form {
                       <input
                         className="form-control"
                         disabled={this.state.isLoading}
-                        onChange={this.onNoLaterThanChange}
+                        onChange={this.onEndChange}
                         type="date"
-                        value={this.state.no_later_than}
+                        value={this.state.end}
                       />
                     </ToolbarItem>
                   </ToolbarSection>
@@ -590,7 +590,7 @@ export default class extends Form {
           </Toolbar>
           <MarkupEditor
             attachments={this.state.attachments}
-            placeholder={"# Please add addiional information here, like meeting point, morning or afternoon preference, prefer male or female, etc."}
+            placeholder={"# Please add addiional information here \n Example: Please PM me or contact at 043211122x, Girls only, no pets, no smoking, no alcohol, etc."}
             value={this.state.post}
             submitText={pgettext("post thread submit", "Start thread")}
             disabled={this.state.isLoading}
