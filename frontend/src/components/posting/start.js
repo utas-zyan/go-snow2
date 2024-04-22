@@ -288,7 +288,7 @@ export default class extends Form {
         return false
       }
     } else if (this.state.category === 5) {
-      if (!this.state.city.trim().length) {
+      if (!this.state.at.trim().length) {
         snackbar.error(pgettext("posting form", "Please provide which city."))
         return false
       }

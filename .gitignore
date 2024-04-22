@@ -60,4 +60,4 @@ pylint.txt
 docker-compose.override.yml
 
 # misago compiled
-frontend/misago/static
+misago/static/
