@@ -35,7 +35,7 @@ const ThreadsToolbar = ({
       <ToolbarSection>
         <ToolbarItem>
           <ThreadsCategoryPicker
-            allItems={pgettext("threads list nav", "All categories")}
+            allItems={pgettext("threads list nav", "Filter by Category")}
             parentUrl={list.path}
             category={topCategory}
             categories={topCategories}
@@ -63,7 +63,7 @@ const ThreadsToolbar = ({
       </ToolbarSection>
     )}
     <ToolbarSpacer />
-    {!!user.id && (
+    {!!user.id && category.id != 2 && (
       <ToolbarSection>
         <ToolbarItem>
           <Button
@@ -83,7 +83,7 @@ const ThreadsToolbar = ({
             }}
           >
             <span className="material-icon">chat</span>
-            {pgettext("threads list nav", "Start thread")}
+            {pgettext("threads list nav", "New Thread")}
           </Button>
         </ToolbarItem>
         {!!moderation.allow && (
@@ -107,6 +107,52 @@ const ThreadsToolbar = ({
             />
           </ToolbarItem>
         )}
+      </ToolbarSection>
+    )}
+    {!!user.id && category.id == 2 && (
+      <ToolbarSection>
+        <ToolbarItem>
+          <Button
+            className="btn-primary btn-outline btn-block"
+            disabled={disabled}
+            onClick={() => {
+              posting.open(
+                startThread || {
+                  mode: "START",
+
+                  config: misago.get("THREAD_EDITOR_API"),
+                  submit: misago.get("THREADS_API"),
+
+                  category: 4,
+                }
+              )
+            }}
+          >
+            <span className="material-icon">chat</span>
+            {pgettext("threads list nav", "New Thread on Ride")}
+          </Button>
+        </ToolbarItem>
+        <ToolbarItem>
+          <Button
+            className="btn-primary btn-outline btn-block"
+            disabled={disabled}
+            onClick={() => {
+              posting.open(
+                startThread || {
+                  mode: "START",
+
+                  config: misago.get("THREAD_EDITOR_API"),
+                  submit: misago.get("THREADS_API"),
+
+                  category: 5,
+                }
+              )
+            }}
+          >
+            <span className="material-icon">chat</span>
+            {pgettext("threads list nav", "New Thread on Rooms")}
+          </Button>
+        </ToolbarItem>
       </ToolbarSection>
     )}
   </Toolbar>

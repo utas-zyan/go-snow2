@@ -13,11 +13,27 @@ import PostingDialogBody from "./PostingDialogBody"
 import PostingDialogError from "./PostingDialogError"
 import PostingDialogHeader from "./PostingDialogHeader"
 import PostingThreadOptions from "./PostingThreadOptions"
+import Select from "misago/components/select"
 
 export default class extends Form {
+
   constructor(props) {
     super(props)
-
+    this.types = [
+      {
+        value: "Provide",
+        label: pgettext(
+          "post thread",
+          "Providing"
+        ),
+      },
+      {
+        value: "Seek",
+        label: pgettext(
+          "post thread",
+          "Seeking"),
+      }
+    ]
     this.state = {
       isReady: false,
       isLoading: false,
@@ -30,6 +46,15 @@ export default class extends Form {
       options: null,
 
       title: "",
+      type: this.types[0],
+      from: "",
+      to: "",
+      at: "",
+      start: new Date().toISOString().split('T')[0],
+      end: new Date().toISOString().split('T')[0],
+      date: new Date().toISOString().split('T')[0],
+      no_of_seats: 1,
+      no_of_room: 1,
       category: props.category || null,
       categories: [],
       post: "",
@@ -112,11 +137,72 @@ export default class extends Form {
     this.changeValue("title", event.target.value)
   }
 
+  onTypeChange = (event) => {
+    const selectedType = this.types.find(type => type.value === event.target.value);
+    console.log(selectedType);
+    this.setState({
+      type: selectedType
+    })
+
+    this.changeValue("title", "[" + event.target.value + "]: seats " + this.state.no_of_seats +
+      " from/" + this.state.from + " to/" + this.state.to +
+      " date/" + this.state.date)
+  }
+  onFromChange = (event) => {
+    this.changeValue("from", event.target.value)
+    //change value of title into x
+    this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
+      " from/" + event.target.value + " to/" + this.state.to +
+      " date/" + this.state.date)
+  }
+  onToChange = (event) => {
+    this.changeValue("to", event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
+      " from/" + this.state.from + " to/" + event.target.value +
+      " date/" + this.state.date)
+  }
+  onDateChange = (event) => {
+    this.changeValue("date", event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
+      " from/" + this.state.from + " to/" + this.state.to +
+      " date/" + event.target.value)
+  }
+
+  onNoOfseatsChange = (event) => {
+    this.changeValue("no_of_seats", event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + "] rooms " + event.target.value +
+      " from/" + this.state.from + " to/" + this.state.to +
+      " date/" + this.state.date)
+  }
+  onNoOfRoomChange = (event) => {
+    this.changeValue("no_of_room", event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + "] rooms " + event.target.value +
+      " at/" + this.state.at + " start/" + this.state.start +
+      " end/" + this.state.end)
+  }
+
+  onAtChange = (event) => {
+    this.changeValue("at", event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
+      " at/" + event.target.value + " start/" + this.state.start +
+      " end/" + this.state.end)
+  }
+  onStartChange = (event) => {
+    this.changeValue("start", event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
+      " at/" + this.state.at + " start/" + event.target.value +
+      " end/" + this.state.end)
+  }
+  onEndChange = (event) => {
+    this.changeValue("end", event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
+      " at/" + this.state.at + " start/" + this.state.start +
+      " end/" + event.target.value)
+  }
   onCategoryChange = (event) => {
     const category = this.state.categories.find((item) => {
       return event.target.value == item.value
     })
-
     // if selected pin is greater than allowed, reduce it
     let pin = this.state.pin
     if (category.post.pin && category.post.pin < pin) {
@@ -191,15 +277,32 @@ export default class extends Form {
   }
 
   clean() {
+
+    if (this.state.category === 4) {
+      if (!this.state.from.trim().length) {
+        snackbar.error(pgettext("posting form", "Please provide where you start."))
+        return false
+      }
+      if (!this.state.to.trim().length) {
+        snackbar.error(pgettext("posting form", "Please provide your destination"))
+        return false
+      }
+    } else if (this.state.category === 5) {
+      if (!this.state.at.trim().length) {
+        snackbar.error(pgettext("posting form", "Please provide which city."))
+        return false
+      }
+    }
+
     if (!this.state.title.trim().length) {
       snackbar.error(
-        pgettext("posting form", "You have to enter thread title.")
+        pgettext("posting form", "Please provide thread title.")
       )
       return false
     }
 
     if (!this.state.post.trim().length) {
-      snackbar.error(pgettext("posting form", "You have to enter a message."))
+      snackbar.error(pgettext("posting form", "Please provide a message."))
       return false
     }
 
@@ -291,13 +394,14 @@ export default class extends Form {
                 </ToolbarItem>
               </ToolbarSection>
             </Toolbar>
+
             <MarkupEditor
               attachments={[]}
               value={""}
               submitText={pgettext("post thread submit", "Start thread")}
               disabled={true}
-              onAttachmentsChange={() => {}}
-              onChange={() => {}}
+              onAttachmentsChange={() => { }}
+              onChange={() => { }}
             />
           </div>
         </PostingDialogStart>
@@ -314,18 +418,7 @@ export default class extends Form {
       <PostingDialogStart {...dialogProps}>
         <form className="posting-dialog-form" onSubmit={this.handleSubmit}>
           <Toolbar className="posting-dialog-toolbar">
-            <ToolbarSection className="posting-dialog-thread-title" auto>
-              <ToolbarItem auto>
-                <input
-                  className="form-control"
-                  disabled={this.state.isLoading}
-                  onChange={this.onTitleChange}
-                  placeholder={pgettext("post thread", "Thread title")}
-                  type="text"
-                  value={this.state.title}
-                />
-              </ToolbarItem>
-            </ToolbarSection>
+
             <ToolbarSection className="posting-dialog-category-select" auto>
               <ToolbarItem>
                 <CategorySelect
@@ -335,6 +428,7 @@ export default class extends Form {
                   value={this.state.category}
                 />
               </ToolbarItem>
+
               {showOptions && (
                 <ToolbarItem shrink>
                   <PostingThreadOptions
@@ -354,9 +448,149 @@ export default class extends Form {
                 </ToolbarItem>
               )}
             </ToolbarSection>
+            {
+              (this.state.category === 4 && (
+                <ToolbarSection className="posting-dialog-category-select" auto>
+
+                  <ToolbarItem auto>
+                    <label>
+                      {pgettext("post thread", "I am")}
+                    </label>
+                    <Select
+                      id="id_create_post_type"
+                      className="form-control"
+                      disabled={this.state.isLoading}
+                      onChange={this.onTypeChange}
+                      value={this.state.type.value}
+                      choices={this.types}
+                    />
+                    <label>
+                      {pgettext("post thread", " no. of seats")}
+                    </label>
+                    <input
+                      className="form-control"
+                      disabled={this.state.isLoading}
+                      onChange={this.onNoOfseatsChange}
+                      placeholder={pgettext("post thread", "1")}
+                      type="number"
+                      value={this.state.no_of_seats}
+                    />
+                    <label>
+                      {pgettext("post thread", "From")}
+                    </label>
+                    <input
+                      className="form-control"
+                      disabled={this.state.isLoading}
+                      onChange={this.onFromChange}
+                      placeholder={pgettext("post thread", "City")}
+                      type="text"
+                      value={this.state.from}
+                    />
+                    <label>
+                      {pgettext("post thread", "To")}
+                    </label>
+                    <input
+                      className="form-control"
+                      disabled={this.state.isLoading}
+                      onChange={this.onToChange}
+                      placeholder={pgettext("post thread", "City")}
+                      type="text"
+                      value={this.state.to}
+                    />
+                    <label>
+                      {pgettext("post thread", "Date")}
+                    </label>
+                    <input
+                      className="form-control"
+                      disabled={this.state.isLoading}
+                      onChange={this.onDateChange}
+                      placeholder={pgettext("post thread", "Date")}
+                      type="date"
+                      value={this.state.date}
+                    />
+                  </ToolbarItem>
+                </ToolbarSection>
+              )) || (
+                this.state.category === 5 && (
+                  <ToolbarSection className="posting-dialog-category-select" auto>
+                    <ToolbarItem auto>
+                      <label>
+                        {pgettext("post thread", "I am")}
+                      </label>
+                      <Select
+                        id="id_create_post_type"
+                        className="form-control"
+                        disabled={this.state.isLoading}
+                        onChange={this.onTypeChange}
+                        value={this.state.type.value}
+                        choices={this.types}
+                      />
+                      <label>
+                        {pgettext("post thread", "no. of rooms")}
+                      </label>
+
+                      <input
+                        className="form-control"
+                        disabled={this.state.isLoading}
+                        onChange={this.onNoOfRoomChange}
+                        placeholder={"1"}
+                        type="number"
+                        value={this.state.no_of_room}
+                      />
+                      <label>
+                        {pgettext("post thread", "At")}
+                      </label>
+                      <input
+                        className="form-control"
+                        disabled={this.state.isLoading}
+                        onChange={this.onAtChange}
+                        placeholder={pgettext("post thread", "City")}
+                        type="text"
+                        value={this.state.at}
+                      />
+                      <label>
+                        {pgettext("post thread", "Starting")}
+                      </label>
+                      <input
+                        className="form-control"
+                        disabled={this.state.isLoading}
+                        onChange={this.onStartChange}
+                        type="date"
+                        value={this.state.start}
+                      />
+                      <label>
+                        {pgettext("post thread", "Ending")}
+                      </label>
+                      <input
+                        className="form-control"
+                        disabled={this.state.isLoading}
+                        onChange={this.onEndChange}
+                        type="date"
+                        value={this.state.end}
+                      />
+                    </ToolbarItem>
+                  </ToolbarSection>
+                ))
+              }
+            <ToolbarSection className="posting-dialog-thread-title" auto>
+              <ToolbarItem auto>
+                <label>
+                  {pgettext("post thread", "Thread title")}
+                </label>
+                <textarea
+                  className="form-control"
+                  disabled={this.state.category === 4 || this.state.category === 5}
+                  onChange={this.onTitleChange}
+                  placeholder={pgettext("post thread", "Thread title")}
+                  type="text"
+                  value={this.state.title}
+                />
+              </ToolbarItem>
+            </ToolbarSection>
           </Toolbar>
           <MarkupEditor
             attachments={this.state.attachments}
+            placeholder={"# Please add addiional information here \n Example: Please PM me or contact at 043211122x, Girls only, no pets, no smoking, no alcohol, etc."}
             value={this.state.post}
             submitText={pgettext("post thread submit", "Start thread")}
             disabled={this.state.isLoading}
@@ -364,7 +598,7 @@ export default class extends Form {
             onChange={this.onPostChange}
           />
         </form>
-      </PostingDialogStart>
+      </PostingDialogStart >
     )
   }
 }

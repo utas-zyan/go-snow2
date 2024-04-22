@@ -26,7 +26,7 @@ services:
       # Superuser
       - SUPERUSER_USERNAME=Admin
       - SUPERUSER_EMAIL=admin@example.com
-      - SUPERUSER_PASSWORD=password
+      - SUPERUSER_PASSWORD=isItTrueThis
     ports:
       # Map port 8000 in the container to port 8000 on the host
       # This way we can access the forum through http://localhost:8000

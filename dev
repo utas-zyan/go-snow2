@@ -6,7 +6,6 @@
 RED='\033[0;31m'
 BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
-
 # Required ports
 # Some tasks test for those ports before continuing
 port_django=${MISAGO_DEVSERVER_PORT:-8000}
@@ -16,8 +15,8 @@ required_ports=($port_postgresql $port_django)
 
 # Default superuser
 username="Admin"
-password="password"
-email="admin@example.com"
+password="AdminPassWord001"
+email="cheney@gosnow.me"
 
 # Utility functions used by action commands
 error() {
@@ -119,7 +118,7 @@ invalid_argument() {
 # Initialize new dev project
 init() {
     for port in "${required_ports[@]}"; do
-        nc "127.0.0.1" "$port" < /dev/null
+        nc -w 1 "127.0.0.1" "$port" < /dev/null
         if [[ $? = "0" ]]; then
             if [[ $port = $port_django ]]; then
                 error "Other application appears to already be running on http://127.0.0.1:${port_django}"

@@ -22,6 +22,9 @@ module.exports = (env, argv) => {
   const isProduction = argv.mode === "production";
 
   return {
+     performance: {
+	         hints: false,
+     },
     mode: isProduction ? "production" : "development",
     devtool: "source-map",
     entry: {
