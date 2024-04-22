@@ -7,6 +7,7 @@ import store from "misago/services/store"
 import ThreadChangeTitleModal from "./ThreadChangeTitleModal"
 import MergeModal from "./merge"
 import MoveModal from "./move"
+import ThreadMarkClosedModal from "./ThreadMarkClosedModal"
 
 export default class extends React.Component {
   callApi = (ops, successMessage) => {
@@ -35,7 +36,9 @@ export default class extends React.Component {
   changeTitle = () => {
     modal.show(<ThreadChangeTitleModal thread={this.props.thread} />)
   }
-
+  markClosed = () => {
+    modal.show(<ThreadMarkClosedModal thread={this.props.thread} />)
+  }
   pinGlobally = () => {
     this.callApi(
       [
@@ -180,7 +183,6 @@ export default class extends React.Component {
 
   render() {
     const { moderation } = this.props
-
     return (
       <ul className="dropdown-menu dropdown-menu-right stick-to-bottom">
         {!!moderation.edit && (
@@ -192,6 +194,18 @@ export default class extends React.Component {
             >
               <span className="material-icon">edit</span>
               {pgettext("thread moderation btn", "Change title")}
+            </button>
+          </li>
+        )}
+        {!!moderation.edit && (
+          <li>
+            <button
+              className="btn btn-link"
+              onClick={this.markClosed}
+              type="button"
+            >
+              <span className="material-icon">close</span>
+              {pgettext("thread moderation btn", "Close thread")}
             </button>
           </li>
         )}
