@@ -53,6 +53,8 @@ export default class extends Form {
       start: new Date().toISOString().split('T')[0],
       end: new Date().toISOString().split('T')[0],
       date: new Date().toISOString().split('T')[0],
+      seats_pay: 0,
+      room_pay: 0,
       no_of_seats: 1,
       no_of_room: 1,
       category: props.category || null,
@@ -136,6 +138,20 @@ export default class extends Form {
   onTitleChange = (event) => {
     this.changeValue("title", event.target.value)
   }
+  
+  onNumberFieldSelected = (event)=>{
+    if (event.target.value==0){
+      event.target.value=""
+    }
+  }
+  onNumberFieldDeSelected = (event)=>{
+    console.log(event.target.value)
+    if (event.target.value==""){
+      event.target.value=0
+    } else {
+      event.target.value = parseInt(event.target.value)
+    }
+  }
 
   onTypeChange = (event) => {
     const selectedType = this.types.find(type => type.value === event.target.value);
@@ -146,58 +162,69 @@ export default class extends Form {
 
     this.changeValue("title", "[" + event.target.value + "]: seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + this.state.date)
+      " on date/" + this.state.date+ (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
   }
   onFromChange = (event) => {
     this.changeValue("from", event.target.value)
     //change value of title into x
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + event.target.value + " to/" + this.state.to +
-      " date/" + this.state.date)
+      " on date/" + this.state.date+ (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
   }
   onToChange = (event) => {
     this.changeValue("to", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + event.target.value +
-      " date/" + this.state.date)
+      " on date/" + this.state.date+ (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
   }
   onDateChange = (event) => {
     this.changeValue("date", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + event.target.value)
+      " on date/" + event.target.value+ (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
   }
-
+  onSeatsPayChange = (event) => {
+    this.changeValue("seats_pay", event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
+      " from/" + this.state.from + " to/" + this.state.to +
+      " on date/" + event.target.value + (event.target.value == 0? " for free": " sharing cost (AUD): "+event.target.value) )
+  }
   onNoOfseatsChange = (event) => {
     this.changeValue("no_of_seats", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + event.target.value +
       " from/" + this.state.from + " to/" + this.state.to +
-      " date/" + this.state.date)
+      " on date/" + this.state.date + (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
+  }
+
+  onRoomPayChange = (event) => {
+    this.changeValue("room_pay", event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
+      " at/" + this.state.at + " start/" + event.target.value +
+      " end/" + this.state.end + (event.target.value == 0? " for free": " sharing cost (AUD): "+event.target.value) )
   }
   onNoOfRoomChange = (event) => {
     this.changeValue("no_of_room", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + event.target.value +
       " at/" + this.state.at + " start/" + this.state.start +
-      " end/" + this.state.end)
+      " end/" + this.state.end+ (this.state.room_pay == 0? " for free": " sharing cost (AUD): "+this.state.room_pay) )
   }
-
   onAtChange = (event) => {
     this.changeValue("at", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
       " at/" + event.target.value + " start/" + this.state.start +
-      " end/" + this.state.end)
+      " end/" + this.state.end+ (this.state.room_pay == 0? " for free": " sharing cost (AUD): "+this.state.room_pay) )
   }
   onStartChange = (event) => {
     this.changeValue("start", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
       " at/" + this.state.at + " start/" + event.target.value +
-      " end/" + this.state.end)
+      " end/" + this.state.end+(this.state.room_pay == 0? " for free": " sharing cost (AUD): "+this.state.room_pay))
   }
   onEndChange = (event) => {
     this.changeValue("end", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
       " at/" + this.state.at + " start/" + this.state.start +
-      " end/" + event.target.value)
+      " end/" + event.target.value+(this.state.room_pay == 0? " for free": " sharing cost (AUD): "+this.state.room_pay))
   }
   onCategoryChange = (event) => {
     const category = this.state.categories.find((item) => {
@@ -508,6 +535,20 @@ export default class extends Form {
                       type="date"
                       value={this.state.date}
                     />
+                    <label>
+                      {pgettext("post thread", "Share cost (A$)")}
+                    </label>
+                    <input
+                      className="form-control"
+                      disabled={this.state.isLoading}
+                      onChange={this.onSeatsPayChange}
+                      placeholder={pgettext("post thread", "0")}
+                      onFocus={this.onNumberFieldSelected}
+                      onBlur={this.onNumberFieldDeSelected}
+                      type="number"
+                      value={this.state.seats_pay}
+                    />
+                    
                   </ToolbarItem>
                 </ToolbarSection>
               )) || (
@@ -568,6 +609,19 @@ export default class extends Form {
                         type="date"
                         value={this.state.end}
                       />
+                      <label>
+                      {pgettext("post thread", "Share cost (A$)")}
+                    </label>
+                    <input
+                      className="form-control"
+                      disabled={this.state.isLoading}
+                      onChange={this.onRoomPayChange}
+                      placeholder={pgettext("post thread", "Share cost")}
+                      onFocus={this.onNumberFieldSelected}
+                      onBlur={this.onNumberFieldDeSelected}
+                      type="number"
+                      value={this.state.room_pay}
+                    />
                     </ToolbarItem>
                   </ToolbarSection>
                 ))
@@ -579,7 +633,7 @@ export default class extends Form {
                 </label>
                 <textarea
                   className="form-control"
-                  disabled={this.state.category === 4 || this.state.category === 5}
+                  disabled={this.state.isLoading}
                   onChange={this.onTitleChange}
                   placeholder={pgettext("post thread", "Thread title")}
                   type="text"
