@@ -120,7 +120,7 @@ class MarkupEditor extends React.Component {
           placeholder={this.props.placeholder}
           value={this.props.value}
           disabled={this.props.disabled || this.state.loading}
-          rows={6}
+          rows={1}
           ref={(element) => {
             if (element && this.state.element !== element) {
               this.setState({ element })
