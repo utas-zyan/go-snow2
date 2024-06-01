@@ -138,16 +138,16 @@ export default class extends Form {
   onTitleChange = (event) => {
     this.changeValue("title", event.target.value)
   }
-  
-  onNumberFieldSelected = (event)=>{
-    if (event.target.value==0){
-      event.target.value=""
+
+  onNumberFieldSelected = (event) => {
+    if (event.target.value == 0) {
+      event.target.value = ""
     }
   }
-  onNumberFieldDeSelected = (event)=>{
+  onNumberFieldDeSelected = (event) => {
     console.log(event.target.value)
-    if (event.target.value==""){
-      event.target.value=0
+    if (event.target.value == "") {
+      event.target.value = 0
     } else {
       event.target.value = parseInt(event.target.value)
     }
@@ -162,69 +162,69 @@ export default class extends Form {
 
     this.changeValue("title", "[" + event.target.value + "]: seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + this.state.to +
-      " on date/" + this.state.date+ (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
+      " on date/" + this.state.date + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
   }
   onFromChange = (event) => {
     this.changeValue("from", event.target.value)
     //change value of title into x
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + event.target.value + " to/" + this.state.to +
-      " on date/" + this.state.date+ (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
+      " on date/" + this.state.date + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
   }
   onToChange = (event) => {
     this.changeValue("to", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + event.target.value +
-      " on date/" + this.state.date+ (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
+      " on date/" + this.state.date + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
   }
   onDateChange = (event) => {
     this.changeValue("date", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + this.state.to +
-      " on date/" + event.target.value+ (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
+      " on date/" + event.target.value + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
   }
   onSeatsPayChange = (event) => {
     this.changeValue("seats_pay", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
       " from/" + this.state.from + " to/" + this.state.to +
-      " on date/" + event.target.value + (event.target.value == 0? " for free": " sharing cost (AUD): "+event.target.value) )
+      " on date/" + this.state.date + (event.target.value == 0 ? " for free" : " with payment (AUD): " + event.target.value))
   }
   onNoOfseatsChange = (event) => {
     this.changeValue("no_of_seats", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + event.target.value +
       " from/" + this.state.from + " to/" + this.state.to +
-      " on date/" + this.state.date + (this.state.seats_pay == 0? " for free": " sharing cost (AUD): "+this.state.seats_pay) )
+      " on date/" + this.state.date + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
   }
 
   onRoomPayChange = (event) => {
     this.changeValue("room_pay", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
-      " at/" + this.state.at + " start/" + event.target.value +
-      " end/" + this.state.end + (event.target.value == 0? " for free": " sharing cost (AUD): "+event.target.value) )
+      " at/" + this.state.at + " start/" + this.state.start +
+      " end/" + this.state.end + (event.target.value == 0 ? " for free" : " with payment (AUD): " + event.target.value))
   }
   onNoOfRoomChange = (event) => {
     this.changeValue("no_of_room", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + event.target.value +
       " at/" + this.state.at + " start/" + this.state.start +
-      " end/" + this.state.end+ (this.state.room_pay == 0? " for free": " sharing cost (AUD): "+this.state.room_pay) )
+      " end/" + this.state.end + (this.state.room_pay == 0 ? " for free" : " with payment (AUD): " + this.state.room_pay))
   }
   onAtChange = (event) => {
     this.changeValue("at", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
       " at/" + event.target.value + " start/" + this.state.start +
-      " end/" + this.state.end+ (this.state.room_pay == 0? " for free": " sharing cost (AUD): "+this.state.room_pay) )
+      " end/" + this.state.end + (this.state.room_pay == 0 ? " for free" : " with payment (AUD): " + this.state.room_pay))
   }
   onStartChange = (event) => {
     this.changeValue("start", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
       " at/" + this.state.at + " start/" + event.target.value +
-      " end/" + this.state.end+(this.state.room_pay == 0? " for free": " sharing cost (AUD): "+this.state.room_pay))
+      " end/" + this.state.end + (this.state.room_pay == 0 ? " for free" : " with payment (AUD): " + this.state.room_pay))
   }
   onEndChange = (event) => {
     this.changeValue("end", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
       " at/" + this.state.at + " start/" + this.state.start +
-      " end/" + event.target.value+(this.state.room_pay == 0? " for free": " sharing cost (AUD): "+this.state.room_pay))
+      " end/" + event.target.value + (this.state.room_pay == 0 ? " for free" : " with payment (AUD): " + this.state.room_pay))
   }
   onCategoryChange = (event) => {
     const category = this.state.categories.find((item) => {
@@ -303,6 +303,296 @@ export default class extends Form {
     this.setState({ fullscreen: false, minimized: false })
   }
 
+  renderWidgetsCategory = () => {
+    switch (this.state.category) {
+      case 5:
+        return <div>
+          <ToolbarSection auto>
+            <ToolbarItem shrink>
+              <label>
+                {pgettext("post thread", "I'm")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem auto>
+              <Select
+                id="id_create_post_type"
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onTypeChange}
+                value={this.state.type.value}
+                choices={this.types}
+              />
+            </ToolbarItem>
+
+            <ToolbarItem auto>
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onNoOfRoomChange}
+                placeholder={"1"}
+                type="number"
+                value={this.state.no_of_room}
+              />
+            </ToolbarItem>
+            <ToolbarItem shrink>
+              <label >
+                {pgettext("post thread", "Room(s)")}
+              </label>
+            </ToolbarItem>
+          </ToolbarSection>
+
+
+          <ToolbarSection auto>
+            <ToolbarItem shrink>
+              <label>
+                {pgettext("post thread", "At")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem auto>
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onAtChange}
+                placeholder={pgettext("post thread", "City")}
+                type="text"
+                value={this.state.at}
+              />
+            </ToolbarItem>
+            <ToolbarItem shrink>
+              <label>
+                {pgettext("post thread", "Pay")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem auto>
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onRoomPayChange}
+                placeholder={pgettext("post thread", "Share cost")}
+                onFocus={this.onNumberFieldSelected}
+                onBlur={this.onNumberFieldDeSelected}
+                type="number"
+                value={this.state.room_pay}
+              />
+            </ToolbarItem>
+            <ToolbarItem shrink>
+              <label>
+                {pgettext("post thread", "A($)")}
+              </label>
+            </ToolbarItem>
+          </ToolbarSection>
+
+          <ToolbarSection auto>
+            <ToolbarItem shrink>
+
+              <label>
+                {pgettext("post thread", "Start")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem auto>
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onStartChange}
+                type="date"
+                value={this.state.start}
+              />
+            </ToolbarItem>
+            <ToolbarItem shrink>
+
+              <label>
+                {pgettext("post thread", "End")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem auto>
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onEndChange}
+                type="date"
+                value={this.state.end}
+              />
+
+            </ToolbarItem>
+          </ToolbarSection> </div>
+      case 4:
+        return <div>
+          <ToolbarSection auto>
+            <ToolbarItem shrink>
+              <label>
+                {pgettext("post thread", "I'm")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem auto>
+              <Select
+                id="id_create_post_type"
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onTypeChange}
+                value={this.state.type.value}
+                choices={this.types}
+              /></ToolbarItem>
+
+            <ToolbarItem auto>
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onNoOfseatsChange}
+                placeholder={pgettext("post thread", "1")}
+                type="number"
+                value={this.state.no_of_seats}
+              />
+            </ToolbarItem>
+            <ToolbarItem shrink>
+              <label >
+                {pgettext("post thread", "Seat(s)")}
+              </label>
+            </ToolbarItem>
+          </ToolbarSection>
+
+
+          <ToolbarSection auto>
+            <ToolbarItem shrink>
+              <label>
+                {pgettext("post thread", "From")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem auto>
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onFromChange}
+                placeholder={pgettext("post thread", "City")}
+                type="text"
+                value={this.state.from}
+              />
+            </ToolbarItem>
+
+            <ToolbarItem shrink>
+              <label>
+                {pgettext("post thread", "To")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem >
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onToChange}
+                placeholder={pgettext("post thread", "City")}
+                type="text"
+                value={this.state.to}
+              />
+            </ToolbarItem>
+          </ToolbarSection>
+
+          <ToolbarSection auto>
+            <ToolbarItem shrink>
+
+              <label>
+                {pgettext("post thread", "Date")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem auto>
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onDateChange}
+                placeholder={pgettext("post thread", "Date")}
+                type="date"
+                value={this.state.date}
+              />
+            </ToolbarItem>
+            <ToolbarItem shrink>
+              <label>
+                {pgettext("post thread", "Pay")}
+              </label>
+            </ToolbarItem>
+            <ToolbarItem>
+              <input
+                className="form-control"
+                disabled={this.state.isLoading}
+                onChange={this.onSeatsPayChange}
+                placeholder={pgettext("post thread", "0")}
+                onFocus={this.onNumberFieldSelected}
+                onBlur={this.onNumberFieldDeSelected}
+                type="number"
+                value={this.state.seats_pay}
+              />
+
+            </ToolbarItem>
+            <ToolbarItem shrink>
+              <label>
+                {pgettext("post thread", "A$")}
+              </label>
+            </ToolbarItem>
+          </ToolbarSection> </div>
+      default: return null
+    }
+  }
+
+  renderToolBar = () => {
+
+    const showOptions = !!(
+      this.state.options.close ||
+      this.state.options.hide ||
+      this.state.options.pin
+    )
+
+    return <Toolbar className="posting-dialog-toolbar">
+      <ToolbarSection className="posting-dialog-category-select" auto>
+        <ToolbarItem shrink>
+          <label>
+            {pgettext("post thread", "On")}
+          </label>
+        </ToolbarItem>
+        <ToolbarItem>
+          <CategorySelect
+            choices={this.state.categories}
+            disabled={this.state.isLoading}
+            onChange={this.onCategoryChange}
+            value={this.state.category}
+          />
+        </ToolbarItem>
+        {showOptions && (
+          <ToolbarItem shrink>
+            <PostingThreadOptions
+              isClosed={this.state.close}
+              isHidden={this.state.hide}
+              isPinned={this.state.pin}
+              disabled={this.state.isLoading}
+              options={this.state.options}
+              close={this.onClose}
+              open={this.onOpen}
+              hide={this.onHide}
+              unhide={this.onUnhide}
+              pinGlobally={this.onPinGlobally}
+              pinLocally={this.onPinLocally}
+              unpin={this.onUnpin}
+            />
+          </ToolbarItem>
+        )}
+      </ToolbarSection>
+      {
+        this.renderWidgetsCategory()
+      }
+      <ToolbarSection className="posting-dialog-thread-title" auto>
+        <ToolbarItem auto>
+          <label>
+            {pgettext("post thread", "Thread title")}
+          </label>
+          <textarea
+            className="form-control"
+            disabled={this.state.isLoading}
+            onChange={this.onTitleChange}
+            placeholder={pgettext("post thread", "Thread title")}
+            type="text"
+            value={this.state.title}
+          />
+        </ToolbarItem>
+      </ToolbarSection>
+    </Toolbar>
+
+  }
   clean() {
 
     if (this.state.category === 4) {
@@ -435,213 +725,12 @@ export default class extends Form {
       )
     }
 
-    const showOptions = !!(
-      this.state.options.close ||
-      this.state.options.hide ||
-      this.state.options.pin
-    )
-
     return (
       <PostingDialogStart {...dialogProps}>
         <form className="posting-dialog-form" onSubmit={this.handleSubmit}>
-          <Toolbar className="posting-dialog-toolbar">
-
-            <ToolbarSection className="posting-dialog-category-select" auto>
-              <ToolbarItem>
-                <CategorySelect
-                  choices={this.state.categories}
-                  disabled={this.state.isLoading}
-                  onChange={this.onCategoryChange}
-                  value={this.state.category}
-                />
-              </ToolbarItem>
-
-              {showOptions && (
-                <ToolbarItem shrink>
-                  <PostingThreadOptions
-                    isClosed={this.state.close}
-                    isHidden={this.state.hide}
-                    isPinned={this.state.pin}
-                    disabled={this.state.isLoading}
-                    options={this.state.options}
-                    close={this.onClose}
-                    open={this.onOpen}
-                    hide={this.onHide}
-                    unhide={this.onUnhide}
-                    pinGlobally={this.onPinGlobally}
-                    pinLocally={this.onPinLocally}
-                    unpin={this.onUnpin}
-                  />
-                </ToolbarItem>
-              )}
-            </ToolbarSection>
-            {
-              (this.state.category === 4 && (
-                <ToolbarSection className="posting-dialog-category-select" auto>
-
-                  <ToolbarItem auto>
-                    <label>
-                      {pgettext("post thread", "I am")}
-                    </label>
-                    <Select
-                      id="id_create_post_type"
-                      className="form-control"
-                      disabled={this.state.isLoading}
-                      onChange={this.onTypeChange}
-                      value={this.state.type.value}
-                      choices={this.types}
-                    />
-                    <label>
-                      {pgettext("post thread", " no. of seats")}
-                    </label>
-                    <input
-                      className="form-control"
-                      disabled={this.state.isLoading}
-                      onChange={this.onNoOfseatsChange}
-                      placeholder={pgettext("post thread", "1")}
-                      type="number"
-                      value={this.state.no_of_seats}
-                    />
-                    <label>
-                      {pgettext("post thread", "From")}
-                    </label>
-                    <input
-                      className="form-control"
-                      disabled={this.state.isLoading}
-                      onChange={this.onFromChange}
-                      placeholder={pgettext("post thread", "City")}
-                      type="text"
-                      value={this.state.from}
-                    />
-                    <label>
-                      {pgettext("post thread", "To")}
-                    </label>
-                    <input
-                      className="form-control"
-                      disabled={this.state.isLoading}
-                      onChange={this.onToChange}
-                      placeholder={pgettext("post thread", "City")}
-                      type="text"
-                      value={this.state.to}
-                    />
-                    <label>
-                      {pgettext("post thread", "Date")}
-                    </label>
-                    <input
-                      className="form-control"
-                      disabled={this.state.isLoading}
-                      onChange={this.onDateChange}
-                      placeholder={pgettext("post thread", "Date")}
-                      type="date"
-                      value={this.state.date}
-                    />
-                    <label>
-                      {pgettext("post thread", "Share cost (A$)")}
-                    </label>
-                    <input
-                      className="form-control"
-                      disabled={this.state.isLoading}
-                      onChange={this.onSeatsPayChange}
-                      placeholder={pgettext("post thread", "0")}
-                      onFocus={this.onNumberFieldSelected}
-                      onBlur={this.onNumberFieldDeSelected}
-                      type="number"
-                      value={this.state.seats_pay}
-                    />
-                    
-                  </ToolbarItem>
-                </ToolbarSection>
-              )) || (
-                this.state.category === 5 && (
-                  <ToolbarSection className="posting-dialog-category-select" auto>
-                    <ToolbarItem auto>
-                      <label>
-                        {pgettext("post thread", "I am")}
-                      </label>
-                      <Select
-                        id="id_create_post_type"
-                        className="form-control"
-                        disabled={this.state.isLoading}
-                        onChange={this.onTypeChange}
-                        value={this.state.type.value}
-                        choices={this.types}
-                      />
-                      <label>
-                        {pgettext("post thread", "no. of rooms")}
-                      </label>
-
-                      <input
-                        className="form-control"
-                        disabled={this.state.isLoading}
-                        onChange={this.onNoOfRoomChange}
-                        placeholder={"1"}
-                        type="number"
-                        value={this.state.no_of_room}
-                      />
-                      <label>
-                        {pgettext("post thread", "At")}
-                      </label>
-                      <input
-                        className="form-control"
-                        disabled={this.state.isLoading}
-                        onChange={this.onAtChange}
-                        placeholder={pgettext("post thread", "City")}
-                        type="text"
-                        value={this.state.at}
-                      />
-                      <label>
-                        {pgettext("post thread", "Starting")}
-                      </label>
-                      <input
-                        className="form-control"
-                        disabled={this.state.isLoading}
-                        onChange={this.onStartChange}
-                        type="date"
-                        value={this.state.start}
-                      />
-                      <label>
-                        {pgettext("post thread", "Ending")}
-                      </label>
-                      <input
-                        className="form-control"
-                        disabled={this.state.isLoading}
-                        onChange={this.onEndChange}
-                        type="date"
-                        value={this.state.end}
-                      />
-                      <label>
-                      {pgettext("post thread", "Share cost (A$)")}
-                    </label>
-                    <input
-                      className="form-control"
-                      disabled={this.state.isLoading}
-                      onChange={this.onRoomPayChange}
-                      placeholder={pgettext("post thread", "Share cost")}
-                      onFocus={this.onNumberFieldSelected}
-                      onBlur={this.onNumberFieldDeSelected}
-                      type="number"
-                      value={this.state.room_pay}
-                    />
-                    </ToolbarItem>
-                  </ToolbarSection>
-                ))
-              }
-            <ToolbarSection className="posting-dialog-thread-title" auto>
-              <ToolbarItem auto>
-                <label>
-                  {pgettext("post thread", "Thread title")}
-                </label>
-                <textarea
-                  className="form-control"
-                  disabled={this.state.isLoading}
-                  onChange={this.onTitleChange}
-                  placeholder={pgettext("post thread", "Thread title")}
-                  type="text"
-                  value={this.state.title}
-                />
-              </ToolbarItem>
-            </ToolbarSection>
-          </Toolbar>
+          {
+            this.renderToolBar()
+          }
           <MarkupEditor
             attachments={this.state.attachments}
             placeholder={"# Please add addiional information here \n Example: Please PM me or contact at 043211122x, Girls only, no pets, no smoking, no alcohol, etc."}
