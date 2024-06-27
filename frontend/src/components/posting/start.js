@@ -15,23 +15,34 @@ import PostingDialogHeader from "./PostingDialogHeader"
 import PostingThreadOptions from "./PostingThreadOptions"
 import Select from "misago/components/select"
 
+const convertDateStr = (dtString) => {
+  // convert from 2022-12-12 to Fri 12/12/2022
+  const dateArr = dtString.split('-')
+  const dateObj = new Date(dtString)
+  const day = dateArr[2]
+  const month = dateArr[1]
+  const year = dateArr[0]
+  const dayOfWeek = dateObj.toLocaleDateString('en', { weekday: 'short' })
+  return `${dayOfWeek} ${day}/${month}/${year}`
+}
+
 export default class extends Form {
 
   constructor(props) {
     super(props)
     this.types = [
       {
-        value: "Provide",
+        value: "Offer",
         label: pgettext(
           "post thread",
-          "Providing"
+          "Offer"
         ),
       },
       {
         value: "Seek",
         label: pgettext(
           "post thread",
-          "Seeking"),
+          "Seek"),
       }
     ]
     this.state = {
@@ -144,8 +155,8 @@ export default class extends Form {
       event.target.value = ""
     }
   }
+
   onNumberFieldDeSelected = (event) => {
-    console.log(event.target.value)
     if (event.target.value == "") {
       event.target.value = 0
     } else {
@@ -160,71 +171,72 @@ export default class extends Form {
       type: selectedType
     })
 
-    this.changeValue("title", "[" + event.target.value + "]: seats " + this.state.no_of_seats +
-      " from/" + this.state.from + " to/" + this.state.to +
-      " on date/" + this.state.date + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
+    this.changeValue("title", "[" + event.target.value + " Car]: " + this.state.no_of_seats + " seat" +
+      " from " + this.state.from + " to " + this.state.to +
+      " on " + convertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
   onFromChange = (event) => {
     this.changeValue("from", event.target.value)
     //change value of title into x
-    this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
-      " from/" + event.target.value + " to/" + this.state.to +
-      " on date/" + this.state.date + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
+    this.changeValue("title", "[" + this.state.type.value + " Car]: " + this.state.no_of_seats + " seat" +
+      " from " + event.target.value + " to " + this.state.to +
+      " on " + convertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
   onToChange = (event) => {
     this.changeValue("to", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
-      " from/" + this.state.from + " to/" + event.target.value +
-      " on date/" + this.state.date + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
+    this.changeValue("title", "[" + this.state.type.value + " Car]: " + this.state.no_of_seats + " seat" +
+      " from " + this.state.from + " to " + event.target.value +
+      " on " + convertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
   onDateChange = (event) => {
     this.changeValue("date", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
-      " from/" + this.state.from + " to/" + this.state.to +
-      " on date/" + event.target.value + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
+    this.changeValue("title", "[" + this.state.type.value + " Car]: " + this.state.no_of_seats + " seat" +
+      " from " + this.state.from + " to " + this.state.to +
+      " on " + convertDateStr(event.target.value) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
   onSeatsPayChange = (event) => {
     this.changeValue("seats_pay", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] seats " + this.state.no_of_seats +
-      " from/" + this.state.from + " to/" + this.state.to +
-      " on date/" + this.state.date + (event.target.value == 0 ? " for free" : " with payment (AUD): " + event.target.value))
+    console.log(event.target.value)
+    this.changeValue("title", "[" + this.state.type.value + " Car]: " + this.state.no_of_seats + " seat" +
+      " from " + this.state.from + " to " + this.state.to +
+      " on " + convertDateStr(this.state.date) + " - " + (event.target.value === 0 || event.target.value === "" ? "free" : ("AU$" + event.target.value)))
   }
   onNoOfseatsChange = (event) => {
     this.changeValue("no_of_seats", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] rooms " + event.target.value +
-      " from/" + this.state.from + " to/" + this.state.to +
-      " on date/" + this.state.date + (this.state.seats_pay == 0 ? " for free" : " with payment (AUD): " + this.state.seats_pay))
+    this.changeValue("title", "[" + this.state.type.value + " Car]: " + event.target.value + " seat" +
+      " from " + this.state.from + " to " + this.state.to +
+      " on " + tconvertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
 
   onRoomPayChange = (event) => {
     this.changeValue("room_pay", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
-      " at/" + this.state.at + " start/" + this.state.start +
-      " end/" + this.state.end + (event.target.value == 0 ? " for free" : " with payment (AUD): " + event.target.value))
+    this.changeValue("title", "[" + this.state.type.value + "] " + this.state.no_of_room + " room" +
+      " at " + this.state.at + " from " + convertDateStr(this.state.start) +
+      " to " + convertDateStr(this.state.end) + " - " + (event.target.value === 0 || event.target.value === "" ? "free" : "AU$" + event.target.value))
   }
   onNoOfRoomChange = (event) => {
     this.changeValue("no_of_room", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] rooms " + event.target.value +
-      " at/" + this.state.at + " start/" + this.state.start +
-      " end/" + this.state.end + (this.state.room_pay == 0 ? " for free" : " with payment (AUD): " + this.state.room_pay))
+    this.changeValue("title", "[" + this.state.type.value + "] " + event.target.value + " room" +
+      " at " + this.state.at + " from " + convertDateStr(this.state.start) +
+      " to " + convertDateStr(this.state.end) + " - " + (this.state.room_pay == 0 ? "free" : "AU$" + this.state.room_pay))
   }
   onAtChange = (event) => {
     this.changeValue("at", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
-      " at/" + event.target.value + " start/" + this.state.start +
-      " end/" + this.state.end + (this.state.room_pay == 0 ? " for free" : " with payment (AUD): " + this.state.room_pay))
+    this.changeValue("title", "[" + this.state.type.value + "] " + this.state.no_of_room + " room" +
+      " at " + event.target.value + " from " + convertDateStr(this.state.start) +
+      " to " + convertDateStr(this.state.end) + " - " + (this.state.room_pay == 0 ? "free" : "AU$" + this.state.room_pay))
   }
   onStartChange = (event) => {
     this.changeValue("start", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
-      " at/" + this.state.at + " start/" + event.target.value +
-      " end/" + this.state.end + (this.state.room_pay == 0 ? " for free" : " with payment (AUD): " + this.state.room_pay))
+    this.changeValue("title", "[" + this.state.type.value + "] " + this.state.no_of_room + " room" +
+      " at " + this.state.at + " from " + convertDateStr(event.target.value) +
+      " to " + convertDateStr(this.state.end) + " - " + (this.state.room_pay == 0 ? "free" : "AU$" + this.state.room_pay))
   }
   onEndChange = (event) => {
     this.changeValue("end", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + "] rooms " + this.state.no_of_room +
-      " at/" + this.state.at + " start/" + this.state.start +
-      " end/" + event.target.value + (this.state.room_pay == 0 ? " for free" : " with payment (AUD): " + this.state.room_pay))
+    this.changeValue("title", "[" + this.state.type.value + "] " + this.state.no_of_room + " room" +
+      " at " + this.state.at + " from " + convertDateStr(this.state.start) +
+      " to " + + convertDateStr(event.target.value) + " - " + (this.state.room_pay == 0 ? "free" : "AU$" + this.state.room_pay))
   }
   onCategoryChange = (event) => {
     const category = this.state.categories.find((item) => {
@@ -310,7 +322,7 @@ export default class extends Form {
           <ToolbarSection auto>
             <ToolbarItem shrink>
               <label>
-                {pgettext("post thread", "I'm")}
+                {pgettext("post thread", "I")}
               </label>
             </ToolbarItem>
             <ToolbarItem auto>
@@ -336,7 +348,7 @@ export default class extends Form {
             </ToolbarItem>
             <ToolbarItem shrink>
               <label >
-                {pgettext("post thread", "Room(s)")}
+                {pgettext("post thread", "room")}
               </label>
             </ToolbarItem>
           </ToolbarSection>
@@ -345,7 +357,7 @@ export default class extends Form {
           <ToolbarSection auto>
             <ToolbarItem shrink>
               <label>
-                {pgettext("post thread", "At")}
+                {pgettext("post thread", "at")}
               </label>
             </ToolbarItem>
             <ToolbarItem auto>
@@ -353,14 +365,14 @@ export default class extends Form {
                 className="form-control"
                 disabled={this.state.isLoading}
                 onChange={this.onAtChange}
-                placeholder={pgettext("post thread", "City")}
+                placeholder={pgettext("post thread", "city")}
                 type="text"
                 value={this.state.at}
               />
             </ToolbarItem>
             <ToolbarItem shrink>
               <label>
-                {pgettext("post thread", "Pay")}
+                {pgettext("post thread", "pay")}
               </label>
             </ToolbarItem>
             <ToolbarItem auto>
@@ -368,7 +380,7 @@ export default class extends Form {
                 className="form-control"
                 disabled={this.state.isLoading}
                 onChange={this.onRoomPayChange}
-                placeholder={pgettext("post thread", "Share cost")}
+                placeholder={pgettext("post thread", "0")}
                 onFocus={this.onNumberFieldSelected}
                 onBlur={this.onNumberFieldDeSelected}
                 type="number"
@@ -377,7 +389,7 @@ export default class extends Form {
             </ToolbarItem>
             <ToolbarItem shrink>
               <label>
-                {pgettext("post thread", "A($)")}
+                {pgettext("post thread", "AUD")}
               </label>
             </ToolbarItem>
           </ToolbarSection>
@@ -386,7 +398,7 @@ export default class extends Form {
             <ToolbarItem shrink>
 
               <label>
-                {pgettext("post thread", "Start")}
+                {pgettext("post thread", "from")}
               </label>
             </ToolbarItem>
             <ToolbarItem auto>
@@ -401,7 +413,7 @@ export default class extends Form {
             <ToolbarItem shrink>
 
               <label>
-                {pgettext("post thread", "End")}
+                {pgettext("post thread", "to")}
               </label>
             </ToolbarItem>
             <ToolbarItem auto>
@@ -420,7 +432,7 @@ export default class extends Form {
           <ToolbarSection auto>
             <ToolbarItem shrink>
               <label>
-                {pgettext("post thread", "I'm")}
+                {pgettext("post thread", "I")}
               </label>
             </ToolbarItem>
             <ToolbarItem auto>
@@ -445,7 +457,7 @@ export default class extends Form {
             </ToolbarItem>
             <ToolbarItem shrink>
               <label >
-                {pgettext("post thread", "Seat(s)")}
+                {pgettext("post thread", "seat")}
               </label>
             </ToolbarItem>
           </ToolbarSection>
@@ -454,7 +466,7 @@ export default class extends Form {
           <ToolbarSection auto>
             <ToolbarItem shrink>
               <label>
-                {pgettext("post thread", "From")}
+                {pgettext("post thread", "from")}
               </label>
             </ToolbarItem>
             <ToolbarItem auto>
@@ -470,7 +482,7 @@ export default class extends Form {
 
             <ToolbarItem shrink>
               <label>
-                {pgettext("post thread", "To")}
+                {pgettext("post thread", "to")}
               </label>
             </ToolbarItem>
             <ToolbarItem >
@@ -489,7 +501,7 @@ export default class extends Form {
             <ToolbarItem shrink>
 
               <label>
-                {pgettext("post thread", "Date")}
+                {pgettext("post thread", "date")}
               </label>
             </ToolbarItem>
             <ToolbarItem auto>
@@ -504,7 +516,7 @@ export default class extends Form {
             </ToolbarItem>
             <ToolbarItem shrink>
               <label>
-                {pgettext("post thread", "Pay")}
+                {pgettext("post thread", "pay")}
               </label>
             </ToolbarItem>
             <ToolbarItem>
@@ -522,7 +534,7 @@ export default class extends Form {
             </ToolbarItem>
             <ToolbarItem shrink>
               <label>
-                {pgettext("post thread", "A$")}
+                {pgettext("post thread", "AUD")}
               </label>
             </ToolbarItem>
           </ToolbarSection> </div>
@@ -576,15 +588,17 @@ export default class extends Form {
         this.renderWidgetsCategory()
       }
       <ToolbarSection className="posting-dialog-thread-title" auto>
-        <ToolbarItem auto>
+        <ToolbarItem shrink>
           <label>
-            {pgettext("post thread", "Thread title")}
+            {pgettext("post thread", "Title")}
           </label>
+        </ToolbarItem>
+        <ToolbarItem auto>
           <textarea
             className="form-control"
             disabled={this.state.isLoading}
             onChange={this.onTitleChange}
-            placeholder={pgettext("post thread", "Thread title")}
+            placeholder={pgettext("post thread", "Title")}
             type="text"
             value={this.state.title}
           />
@@ -733,7 +747,7 @@ export default class extends Form {
           }
           <MarkupEditor
             attachments={this.state.attachments}
-            placeholder={"# Please add addiional information here \n Example: Please PM me or contact at 043211122x, Girls only, no pets, no smoking, no alcohol, etc."}
+            placeholder={"# Please add additional information here \n Example: Please PM me or contact at 043211122x, Girls only, no pets, no smoking, no alcohol, etc."}
             value={this.state.post}
             submitText={pgettext("post thread submit", "Start thread")}
             disabled={this.state.isLoading}

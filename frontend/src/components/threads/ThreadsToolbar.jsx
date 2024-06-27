@@ -40,72 +40,10 @@ const filterList = ({
   }
 }
 
-const newRideThreadButton = ({
-  misago, user, category, disabled, startThread
-}) => {
-  if (!!user.id && category.id == 2) {
-    return <ToolbarItem>
-      <Button
-        className="btn-primary btn-outline btn-block"
-        disabled={disabled}
-        onClick={() => {
-          posting.open(
-            startThread || {
-              mode: "START",
-
-              config: misago.get("THREAD_EDITOR_API"),
-              submit: misago.get("THREADS_API"),
-
-              category: 4,
-            }
-          )
-        }}
-      >
-        <span className="material-icon">chat</span>
-        {pgettext("threads list nav", "New Thread on Ride")}
-      </Button>
-    </ToolbarItem>
-  } else {
-    return null
-
-  }
-}
-
-const newRoomThreadButton = ({
-  misago, user, category, disabled, startThread
-}) => {
-  if (!!user.id && category.id == 2) {
-    return <ToolbarItem>
-      <Button
-        className="btn-primary btn-outline btn-block"
-        disabled={disabled}
-        onClick={() => {
-          posting.open(
-            startThread || {
-              mode: "START",
-
-              config: misago.get("THREAD_EDITOR_API"),
-              submit: misago.get("THREADS_API"),
-
-              category: 5,
-            }
-          )
-        }}
-      >
-        <span className="material-icon">chat</span>
-        {pgettext("threads list nav", "New Thread on Rooms")}
-      </Button>
-    </ToolbarItem>
-  } else {
-    return null
-
-  }
-}
 
 const defaultNewThreadButton = ({
   misago, user, category, disabled, startThread
 }) => {
-  if (!!user.id && category.id != 2) {
     return <ToolbarItem>
       <Button
         className="btn-primary btn-outline btn-block"
@@ -124,13 +62,9 @@ const defaultNewThreadButton = ({
         }}
       >
         <span className="material-icon">chat</span>
-        {pgettext("threads list nav", "New Thread")}
+        {pgettext("threads list nav", "New thread")}
       </Button>
     </ToolbarItem>
-  } else {
-    return null
-
-  }
 }
 const defaultNewThreadButtonModeration = ({
   user, category, disabled, api, categories, categoriesMap,
@@ -192,7 +126,7 @@ const ThreadsToolbar = ({
         <ToolbarSection>
           <ToolbarItem>
             <ThreadsCategoryPicker
-              allItems={pgettext("threads list nav", "Filter by Category")}
+              allItems={pgettext("threads list nav", "Filter by category")}
               parentUrl={list.path}
               category={topCategory}
               categories={topCategories}
@@ -223,12 +157,12 @@ const ThreadsToolbar = ({
               selection, moderation, route
             })
           }
-          {
+          {/* {
             newRideThreadButton({ misago, user, category, disabled, startThread })
           }
           {
             newRoomThreadButton({ misago, user, category, disabled, startThread })
-          }
+          } */}
         </ToolbarSection>
       </div>
     )}

@@ -8,7 +8,7 @@ export default function SearchMessage() {
       <ListGroupMessage
         message={pgettext(
           "search cta",
-          "Enter search query (at least 3 characters)."
+          "What are you looking for? (at least 3 characters)"
         )}
       />
     </SearchResultsList>

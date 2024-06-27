@@ -129,11 +129,11 @@ function SiteNavMenu({ isAnonymous, close, dropdown, overlay }) {
       {(!!footerNav.length || !!extraFooterItems.length) && (
         <DropdownDivider className="site-nav-footer-divider" />
       )}
-      {(!!footerNav.length || !!extraFooterItems.length) && (
+      {/* {(!!footerNav.length || !!extraFooterItems.length) && (
         <DropdownSubheader className="site-nav-footer">
           {pgettext("site nav section", "Footer")}
         </DropdownSubheader>
-      )}
+      )} */}
       {extraFooterItems.map((item, index) => (
         <DropdownMenuItem key={index} className={item.className}>
           <a

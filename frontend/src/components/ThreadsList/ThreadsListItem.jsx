@@ -61,6 +61,11 @@ const ThreadsListItem = ({
           <ThreadsListItemReadStatus thread={thread} />
         </div>
       )}
+      {!!category && (
+        <div className="threads-list-item-col-category">
+          <ThreadsListItemCategory parent={parent} category={category} />
+        </div>
+      )}
       <div className="threads-list-item-right-col">
         <div className="threads-list-item-top-row">
           <ThreadsListItemTitle thread={thread} isNew={isNew} />
@@ -84,11 +89,7 @@ const ThreadsListItem = ({
                 <ThreadFlags thread={thread} />
               </div>
             )}
-            {!!category && (
-              <div className="threads-list-item-col-category">
-                <ThreadsListItemCategory parent={parent} category={category} />
-              </div>
-            )}
+            
           </div>
           <div className="threads-list-item-bottom-right">
             <div
