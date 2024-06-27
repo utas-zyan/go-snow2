@@ -205,7 +205,7 @@ export default class extends Form {
     this.changeValue("no_of_seats", event.target.value)
     this.changeValue("title", "[" + this.state.type.value + " Car]: " + event.target.value + " seat" +
       " from " + this.state.from + " to " + this.state.to +
-      " on " + tconvertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
+      " on " + convertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
 
   onRoomPayChange = (event) => {
