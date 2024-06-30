@@ -171,39 +171,39 @@ export default class extends Form {
       type: selectedType
     })
 
-    this.changeValue("title", "[" + event.target.value + " Car]: " + this.state.no_of_seats + " seat" +
+    this.changeValue("title", "[" + event.target.value + " ] " + this.state.no_of_seats + " seat" +
       " from " + this.state.from + " to " + this.state.to +
       " on " + convertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
   onFromChange = (event) => {
     this.changeValue("from", event.target.value)
     //change value of title into x
-    this.changeValue("title", "[" + this.state.type.value + " Car]: " + this.state.no_of_seats + " seat" +
+    this.changeValue("title", "[" + this.state.type.value + " ] " + this.state.no_of_seats + " seat" +
       " from " + event.target.value + " to " + this.state.to +
       " on " + convertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
   onToChange = (event) => {
     this.changeValue("to", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + " Car]: " + this.state.no_of_seats + " seat" +
+    this.changeValue("title", "[" + this.state.type.value + " ] " + this.state.no_of_seats + " seat" +
       " from " + this.state.from + " to " + event.target.value +
       " on " + convertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
   onDateChange = (event) => {
     this.changeValue("date", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + " Car]: " + this.state.no_of_seats + " seat" +
+    this.changeValue("title", "[" + this.state.type.value + " ] " + this.state.no_of_seats + " seat" +
       " from " + this.state.from + " to " + this.state.to +
       " on " + convertDateStr(event.target.value) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
   onSeatsPayChange = (event) => {
     this.changeValue("seats_pay", event.target.value)
     console.log(event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + " Car]: " + this.state.no_of_seats + " seat" +
+    this.changeValue("title", "[" + this.state.type.value + " ] " + this.state.no_of_seats + " seat" +
       " from " + this.state.from + " to " + this.state.to +
       " on " + convertDateStr(this.state.date) + " - " + (event.target.value === 0 || event.target.value === "" ? "free" : ("AU$" + event.target.value)))
   }
   onNoOfseatsChange = (event) => {
     this.changeValue("no_of_seats", event.target.value)
-    this.changeValue("title", "[" + this.state.type.value + " Car]: " + event.target.value + " seat" +
+    this.changeValue("title", "[" + this.state.type.value + " ] " + event.target.value + " seat" +
       " from " + this.state.from + " to " + this.state.to +
       " on " + convertDateStr(this.state.date) + " - " + (this.state.seats_pay == 0 ? "free" : "AU$" + this.state.seats_pay))
   }
